@@ -25,7 +25,7 @@ import AnimatedTypeWriter from 'react-native-animated-typewriter'
 
 class YourLitComponent extends Component {
   render() {
-    return <AnimatedTypewriter text="I'm living my best life in 2019"/>
+    return <AnimatedTypewriter text={"I'm living my best life in 2019"}/>
   }
 }
 ```
