@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 
-class AnimatedText extends React.Component {
+class AnimatedTypewriter extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,6 +20,9 @@ class AnimatedText extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.state.index !== prevState.index && this.state.index !== this.props.text.length) {
+      this.props.onTyped(this.state.index, this.props.text.substring(0, this.state.text));
+    }
     if (this.state.index !== prevState.index && this.state.index === this.props.text.length) {
       this.props.onTypingEnd();
     }
@@ -81,6 +84,8 @@ AnimatedText.defaultProps = {
   containerStyle: {},
   textStyle: {},
   textProps: {},
+  onTypingEnd: () => {},
+  onTyped: () => {},
 };
 
 AnimatedText.propTypes = {
@@ -98,6 +103,8 @@ AnimatedText.propTypes = {
     PropTypes.arrayOf(PropTypes.object),
     PropTypes.arrayOf(PropTypes.number),
   ]),
+  onTypingEnd: PropTypes.func,
+  onTyped: PropTypes.func,
 };
 
-export default AnimatedText;
+export default AnimatedTypewriter;

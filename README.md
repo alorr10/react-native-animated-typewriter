@@ -1,32 +1,31 @@
 # react-native-typewriter
 
-A [React Native] component for creating typing effects.
-Inspired by [react-typewriter].
+A [React Native] component for spelling out words, letter by letter.
 
 ## Installation
 
 ```
-$ yarn add react-native-typewriter
+$ yarn add react-native-animated-typewriter
 ```
 
 OR
 
 ```
-$ npm install --save react-native-typewriter
+$ npm install --save react-native-animated-typewriter
 ```
 
 ## Usage
 
-Pass text and a typing direction into the component to control its animation.
+All you need is a text prop to make it work.
 
 ```javascript
 
 import React, { Component } from 'react'
-import TypeWriter from 'react-native-typewriter'
+import TypeWriter from 'react-native-animated-typewriter'
 
 class TypingText extends Component {
   render() {
-    return <TypeWriter typing={1}>Hello World!</TypeWriter>
+    return <AnimatedTypewriter text="Hello World!"/>
   }
 }
 ```
@@ -35,14 +34,13 @@ class TypingText extends Component {
 
 Any props accepted by React Native's `Text` component are accepted by `TypeWriter`. These additional props are also accepted:
 
-### typing
+### timeBetweenLetters
 
-type: `Number` default: `0`
+type: `Number` default: `50`
 
-A value of 1 types text left to right until completion. A value of -1 erases
-text from right to left. A value of 0 stops the animation.
+The number of milliseconds between letters typed on the screen
 
-### fixed
+### containerStyle
 
 type: `Boolean` default: `false`
 
@@ -55,47 +53,23 @@ type: `Number` default: `100`
 
 The maximum delay between each typed token in milliseconds.
 
-### minDelay
-
-type: `Number` default: `20`
-
-The minimum delay between each typed token in milliseconds.
-
-### delayMap
-
-type: `Array[Object]` default: `none`
-
-Adds additional delay to specific characters before the next character is typed.
-
-```javascript
-let delayMap = [
-  // increase delay by 100ms at index 4
-  { at: 4, delay: 100 },
-  // increase delay by 400ms following every '.' character
-  { at: '.', delay: 400 },
-  // decrease delay by 200ms following every '!' character
-  { at: /!/, delay: -200 }
-]
-```
 
 ### onTyped
 
 type: `Function` default: `none`
 
-A callback called when each token is typed or erased during the animation. The
+A callback called when each token is typed during the animation. The
 function is called with two arguments:
-`(String token, Number previousVisibleCharacters)`.
+`(Number index, Number previousVisibleCharacters)`.
 
 ### onTypingEnd
 
 type: `Function` default: `none`
 
-Called once the typing animation has completed. This callback is **not** called
-if `props.typing` is changed to `0` before the animation completes.
+Called once the typing animation has completed.
 
 ## License
 
 Released under the MIT license. See [LICENSE](LICENSE) for details.
 
 [React Native]: https://facebook.github.io/react-native/
-[react-typewriter]: https://github.com/ianbjorndilling/react-typewriter
