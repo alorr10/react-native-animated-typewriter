@@ -32,7 +32,7 @@ class YourLitComponent extends Component {
 
 ## Documentation
 
-Any props accepted by React Native's `Text` component are accepted by `TypeWriter`. These additional props are also accepted:
+Any props accepted by React Native's `Text` component are accepted by `AnimatedTypeWriter`. These additional props are also accepted:
 
 ### timeBetweenLetters
 
@@ -42,16 +42,15 @@ The number of milliseconds between letters typed on the screen
 
 ### containerStyle
 
-type: `Boolean` default: `false`
+type: `Object` default: `{}`
 
-This flag will ensure the enclosing container's size and shape is fixed.
-Prevents the text from shifting around as it grows into its container.
+Style the text container
 
-### maxDelay
+### textStyle
 
-type: `Number` default: `100`
+type: `Object` default: `{}`
 
-The maximum delay between each typed token in milliseconds.
+Style the text
 
 
 ### onTyped
