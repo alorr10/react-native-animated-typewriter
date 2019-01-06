@@ -2,29 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 
-const propTypes = {
-  children: PropTypes.string.isRequired,
-  fixed: PropTypes.bool,
-  typing: PropTypes.oneOf([-1, 0, 1]),
-  maxDelay: PropTypes.number,
-  minDelay: PropTypes.number,
-  initialDelay: PropTypes.number,
-  delayMap: PropTypes.arrayOf(delayShape),
-  onTyped: PropTypes.func,
-  onTypingEnd: PropTypes.func,
-};
-
-const MAX_DELAY = 100;
-
-const defaultProps = {
-  initialDelay: MAX_DELAY * 2,
-  maxDelay: MAX_DELAY,
-  minDelay: MAX_DELAY / 5,
-  typing: 0,
-  fixed: false,
-  style: {},
-};
-
 class AnimatedText extends React.Component {
   constructor(props) {
     super(props);
@@ -63,22 +40,25 @@ class AnimatedText extends React.Component {
           index: this.state.index + 1,
         },
         () => {
-          this.timer = setTimeout(this.startAnimatedTyping, this.props.animatedTypingDuration);
+          this.timer = setTimeout(this.startAnimatedTyping, this.props.timeBetweenLetters);
         }
       );
     }
   };
 
   render() {
+    const { containerStyle, textStyle, ...props } = this.props;
     return (
-      <View style={styles.containerStyle}>
-        <Text style={styles.textStyle}>{this.state.text}</Text>
+      <View style={[styles.container, containerStyle]}>
+        <Text style={[styles.text, textStyle]} {...props}>
+          {this.state.text}
+        </Text>
       </View>
     );
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: 'white',
     borderRadius: 10,
@@ -96,19 +76,28 @@ const styles = EStyleSheet.create({
 });
 
 AnimatedText.defaultProps = {
-  text: 'You are one hot mama.',
   textColor: '#FFA613',
-  animatedTextSize: 26,
-  animatedTypingDuration: 50,
-  startCursorDuration: 500,
+  timeBetweenLetters: 50,
+  containerStyle: {},
+  textStyle: {},
+  textProps: {},
 };
 
 AnimatedText.propTypes = {
-  text: PropTypes.string,
-  AnimatedTextSize: PropTypes.number,
-  TextColor: PropTypes.string,
-  AnimatedTypingDuration: PropTypes.number,
-  startCursorDuration: PropTypes.number,
+  text: PropTypes.string.isRequired,
+  timeBetweenLetters: PropTypes.number,
+  containerStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
+  textStyle: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
 };
 
 export default AnimatedText;
