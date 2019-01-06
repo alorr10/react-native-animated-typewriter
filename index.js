@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AnimatedText.defaultProps = {
+AnimatedTypewriter.defaultProps = {
   textColor: '#FFA613',
   timeBetweenLetters: 50,
   containerStyle: {},
@@ -88,7 +88,7 @@ AnimatedText.defaultProps = {
   onTyped: () => {},
 };
 
-AnimatedText.propTypes = {
+AnimatedTypewriter.propTypes = {
   text: PropTypes.string.isRequired,
   timeBetweenLetters: PropTypes.number,
   containerStyle: PropTypes.oneOfType([
