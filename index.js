@@ -20,7 +20,7 @@ class AnimatedTypewriter extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.index !== prevState.index && this.state.index !== this.props.text.length) {
+    if (this.state.index !== prevState.index) {
       this.props.onTyped(this.state.index, this.props.text.substring(0, this.state.text));
     }
     if (this.state.index !== prevState.index && this.state.index === this.props.text.length) {
