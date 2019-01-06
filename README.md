@@ -21,11 +21,11 @@ All you need is a text prop to make it work.
 ```javascript
 
 import React, { Component } from 'react'
-import TypeWriter from 'react-native-animated-typewriter'
+import AnimatedTypeWriter from 'react-native-animated-typewriter'
 
-class TypingText extends Component {
+class YourLitComponent extends Component {
   render() {
-    return <AnimatedTypewriter text="Hello World!"/>
+    return <AnimatedTypewriter text="I'm living my best life in 2019"/>
   }
 }
 ```
