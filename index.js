@@ -62,14 +62,14 @@ class AnimatedTypewriter extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  container: {
     backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: 'white',
     overflow: 'hidden',
   },
-  textStyle: {
+  text: {
     fontWeight: 'bold',
     color: 'black',
     fontSize: 26,
