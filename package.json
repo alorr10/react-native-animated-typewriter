@@ -1,0 +1,43 @@
+{
+  "name": "react-native-animated-typewriter",
+  "version": "1.0.0",
+  "description": "A typewriter component for react-native",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alorr10/react-native-animated-typewriter.git"
+  },
+  "scripts": {
+    "lint": "eslint **/*.js"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "typewriter",
+    "typing",
+    "animated",
+    "component"
+  ],
+  "author": "Alec Lorraine <aleclorraine10@gmail.com>",
+  "peerDependencies": {
+    "react": ">=15.4.x",
+    "react-native": ">=0.41.x"
+  },
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.3",
+    "pre-commit": "1.2.2",
+    "react": "15.4.2",
+    "react-native": "0.42.0"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "dependencies": {
+    "proptypes": "1.1.0"
+  }
+}
