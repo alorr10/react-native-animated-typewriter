@@ -19,14 +19,11 @@ $ npm install --save react-native-animated-typewriter
 All you need is a text prop to make it work.
 
 ```javascript
+import React from 'react';
+import AnimatedTypeWriter from 'react-native-animated-typewriter';
 
-import React, { Component } from 'react'
-import AnimatedTypeWriter from 'react-native-animated-typewriter'
-
-class YourLitComponent extends Component {
-  render() {
-    return <AnimatedTypewriter text={"I'm living my best life in 2019"}/>
-  }
+function YourComponent() {
+  return <AnimatedTypewriter text={"I'm living my best life"} />;
 }
 ```
 
@@ -52,7 +49,6 @@ type: `Object` default: `{}`
 
 Style the text
 
-
 ### onTyped
 
 type: `Function` default: `none`
@@ -71,4 +67,4 @@ Called once the typing animation has completed.
 
 Released under the MIT license. See [LICENSE](LICENSE) for details.
 
-[React Native]: https://facebook.github.io/react-native/
+[react native]: https://facebook.github.io/react-native/

@@ -1,64 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 
-class AnimatedTypewriter extends React.Component {
-  constructor(props) {
-    super(props);
+function AnimatedTypewriter({
+  text,
+  timeBetweenLetters,
+  onTyped,
+  onTypingEnd,
+  containerStyle,
+  textStyle,
+  ...rest
+}) {
+  const [currentText, setCurrentText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [delay, setDelay] = useState(timeBetweenLetters);
 
-    this.state = {
-      text: '',
-      index: 0,
-      finished: false,
-    };
-
-    this.timer = -1;
-  }
-
-  componentDidMount() {
-    this.startAnimatedTyping();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.index !== prevState.index) {
-      this.props.onTyped(this.state.index, this.props.text.substring(0, this.state.text));
-    }
-    if (this.state.index !== prevState.index && this.state.index === this.props.text.length) {
-      this.props.onTypingEnd();
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-    this.timer = -1;
-  }
-
-  startAnimatedTyping = () => {
-    clearTimeout(this.timer);
-    this.timer = -1;
-    if (this.state.index < this.props.text.length) {
-      this.setState(
-        {
-          text: this.state.text + this.props.text.charAt(this.state.index),
-          index: this.state.index + 1,
-        },
-        () => {
-          this.timer = setTimeout(this.startAnimatedTyping, this.props.timeBetweenLetters);
-        }
-      );
+  const startAnimatedTyping = () => {
+    if (index < text.length) {
+      setCurrentText((t) => t + text.charAt(index));
+      setIndex((i) => i + 1);
     }
   };
+  useInterval(startAnimatedTyping, delay);
 
-  render() {
-    const { containerStyle, textStyle, ...props } = this.props;
-    return (
-      <View style={[styles.container, containerStyle]}>
-        <Text style={[styles.text, textStyle]} {...props}>
-          {this.state.text}
-        </Text>
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (index > 0) onTyped(index, text.substring(0, text));
+    if (index === text.length) {
+      setDelay(null);
+      onTypingEnd();
+    }
+  }, [index]);
+
+  return (
+    <View style={[styles.container, containerStyle]}>
+      <Text style={[styles.text, textStyle]} {...rest}>
+        {currentText}
+      </Text>
+    </View>
+  );
+}
+
+//Taken from https://overreacted.io/ Thank you!!
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
 
 const styles = StyleSheet.create({
